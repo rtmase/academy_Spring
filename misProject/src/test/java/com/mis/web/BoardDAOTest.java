@@ -1,5 +1,7 @@
 package com.mis.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.FixMethodOrder;
@@ -12,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mis.domain.BoardVO;
+import com.mis.domain.Criteria;
 import com.mis.persistence.BoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,16 +28,28 @@ public class BoardDAOTest {
 	private static Logger logger = LoggerFactory.getLogger(BoardDAOTest.class);
 	
 	@Test
-	public void Test01_create() throws Exception {
-		BoardVO vo = new BoardVO();
-		vo.setTitle("새 게시글");
-		vo.setContent("내용을 적으세요");
-		vo.setWriter("user01");
+	public void testListCriteria() throws Exception{
+		Criteria cri = new Criteria();
+		cri.setPage(2);
 		
-		logger.debug("TEST : " + vo);
+		List<BoardVO> list = dao.listCriteria(cri);
 		
-		dao.create(vo);
+		for (BoardVO boardVO : list) {
+			logger.info(boardVO.getBno() + ":" + boardVO.getTitle());
+		}
 	}
+	
+//	@Test
+//	public void Test01_create() throws Exception {
+//		BoardVO vo = new BoardVO();
+//		vo.setTitle("새 게시글");
+//		vo.setContent("내용을 적으세요");
+//		vo.setWriter("user01");
+//		
+//		logger.debug("TEST : " + vo);
+//		
+//		dao.create(vo);
+//	}
 //	
 //	@Test 
 //	public void Test02_update() throws Exception {

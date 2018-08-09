@@ -3,6 +3,8 @@ package com.mis.persistence;
 import java.util.List;
 
 import com.mis.domain.BoardVO;
+import com.mis.domain.Criteria;
+import com.mis.domain.SearchCriteria;
 
 public interface BoardDAO {
 	/**
@@ -41,4 +43,26 @@ public interface BoardDAO {
 	 * @throws Exception
 	 */
 	public void updateViewCnt(int bno) throws Exception;
+	
+	public List<BoardVO> listPage(int page) throws Exception;
+	
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	
+	public int countPaging(Criteria cri) throws Exception;
+	
+	// use for dynamic sql
+	/**
+	 * 조건 검색
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
+	/**
+	 * 조건 검색한 내용의 수
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 */
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 }
