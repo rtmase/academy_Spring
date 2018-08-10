@@ -28,22 +28,13 @@
 							---</option>
 						<option value="t"
 							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-							Title</option>
+							ProductCode</option>
 						<option value="c"
 							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-							Content</option>
-						<option value="w"
-							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-							Writer</option>
+							ProductName</option>
 						<option value="tc"
 							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-							Title OR Content</option>
-						<option value="cw"
-							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-							Content OR Writer</option>
-						<option value="tcw"
-							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-							Title OR Content OR Writer</option>
+							ProductCode OR ProductName</option>
 					</select> <input type="text" name='keyword' id="keywordInput"
 						value='${cri.keyword }'>
 					<button id='searchBtn'>Search</button>
@@ -64,15 +55,16 @@
 							<th>Name</th>
 							<th>Price</th>
 							<th>Quantity</th>
+							<th>Regdate</th>
 <!-- 							<th style="width: 40px">VIEWCNT</th> -->
 						</tr>
 
 						<c:forEach items="${list}" var="productVO">
 
 							<tr>
-								<td>${boardVO.bno}</td>
+								<td>${productVO.prodcod}</td>
 								<td><a
-									href='/shop/read${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${productVO.prodcod}'>
+									href='/shop/read${pageMaker.makeSearch(pageMaker.cri.page) }&prodcod=${productVO.prodcod}'>
 										${productVO.prodname} </a></td>
 								<td>${productVO.price}</td>
 								<td>${productVO.quantity}</td>

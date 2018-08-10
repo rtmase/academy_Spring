@@ -15,7 +15,7 @@
 				</div>
 				<!-- /.box-header -->
 
-<form role="form" action="modifyPage" method="post">
+<form role="form" action="modify" method="post">
 
 	<input type='hidden' name='page' value="${cri.page}"> <input
 		type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -26,21 +26,21 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">PRODUCTCODE</label> <input type="text"
-								name='bno' class="form-control" value="${productVO.prodcod}"
+								name='prodcod' class="form-control" value="${productVO.prodcod}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">NAME</label> <input type="text"
-								name='title' class="form-control" value="${productVO.prodname}">
+								name='prodname' class="form-control" value="${productVO.prodname}">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">PRICE</label>
-							<textarea class="form-control" name="content" rows="3">${productVO.price}</textarea>
+							<textarea class="form-control" name="price" rows="3">${productVO.price}</textarea>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">QUANTITY</label> <input
-								type="text" name="writer" class="form-control"
+								type="text" name="quantity" class="form-control"
 								value="${productVO.quantity}">
 						</div>
 					</div>
@@ -61,7 +61,7 @@ $(document).ready(
 
 		$(".btn-warning")
 				.on("click",function() {
-					self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+					self.location = "/shop/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
 							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
 				});
 

@@ -13,7 +13,7 @@
         <set>
             moddate  = sysdate
             <if test="prodname != null">
-           , prodname = #{prodName}
+           , prodname = #{prodname}
             </if>
             <if test="price > 0">
            , PRICE    = #{price}

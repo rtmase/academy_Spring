@@ -17,7 +17,7 @@
 
 <form role="form" action="modifyPage" method="post">
 
-	<input type='hidden' name='bno' value="${productVO.prodcod}"> <input
+	<input type='hidden' name='prodcod' value="${productVO.prodcod}"> <input
 		type='hidden' name='page' value="${cri.page}"> <input
 		type='hidden' name='perPageNum' value="${cri.perPageNum}">
 	<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -28,17 +28,17 @@
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">NAME</label> <input type="text"
-							name='title' class="form-control" value="${productVO.prodname}"
+							name='prodname' class="form-control" value="${productVO.prodname}"
 							readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">PRICE</label>
-						<textarea class="form-control" name="content" rows="3"
+						<textarea class="form-control" name="price" rows="3"
 							readonly="readonly">${productVO.price}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">QUANTITY</label> <input type="text"
-							name="writer" class="form-control" value="${productVO.quantity}"
+							name="quantity" class="form-control" value="${productVO.quantity}"
 							readonly="readonly">
 					</div>
 				</div>
