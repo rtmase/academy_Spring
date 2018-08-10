@@ -5,12 +5,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	
+	/** 데이터 전체 개수 */
 	private int totalCount;
+	/** 시작 페이지 번호 */
 	private int startPage;
+	/** 끝 페이지 번호 */
 	private int endPage;
+	/** 이전 페이지 링크 */
 	private boolean prev;
+	/** 이후 페이지 링크 */
 	private boolean next;
 	
+	/** 화면에 보여지는 페이지 번호의 숫자 */
 	private int displayPageNum = 10;
 	
 	private Criteria cri;

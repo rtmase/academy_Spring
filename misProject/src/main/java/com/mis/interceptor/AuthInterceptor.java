@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 로그인이 되있지 않는 사람을 로그인 창으로 보냄
+ * 로그인이 되있지 않는 사람을 로그인 창으로 보내는 권한 클래스
  * @author PC38211
  *
  */

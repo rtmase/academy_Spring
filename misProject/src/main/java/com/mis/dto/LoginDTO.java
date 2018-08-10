@@ -1,7 +1,7 @@
 package com.mis.dto;
 
 /**
- * 화면에 ID,PW,useCookie 정보를 가져올 때 
+ * 화면에 ID,PW,useCookie 정보를 수집하는 클래스
  * @author PC38211
  *
  */

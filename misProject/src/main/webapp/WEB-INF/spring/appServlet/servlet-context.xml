@@ -32,10 +32,16 @@
 			<mapping path="/user/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/sboard/register"/> -->
+<!-- 			<mapping path="/sboard/modifyPage"/> -->
+<!-- 			<mapping path="/sboard/removePage"/> -->
+<!-- 			<beans:ref bean="authInterceptor"/>  -->
+<!-- 		</interceptor> -->
 		<interceptor>
-			<mapping path="/sboard/register"/>
-			<mapping path="/sboard/modifyPage"/>
-			<mapping path="/sboard/removePage"/>
+			<mapping path="/shop/register"/>
+			<mapping path="/shop/modify"/>
+			<mapping path="/shop/remove"/>
 			<beans:ref bean="authInterceptor"/> 
 		</interceptor>
 	</interceptors>

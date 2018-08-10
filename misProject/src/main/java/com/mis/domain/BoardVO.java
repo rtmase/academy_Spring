@@ -3,14 +3,20 @@ package com.mis.domain;
 import java.util.Date;
 
 public class BoardVO {
-	
+	/** 게시물 번호 */
 	private int bno;
+	/** 게시물 제목 */
 	private String title;
+	/** 게시물 내용 */
 	private String content;
+	/** 게시물 작성자 */
 	private String writer;
+	/** 작성 날짜 */
 	private Date regdate;
+	/** 읽은 수 */
 	private int viewcnt;
 	
+	// 생성자 선언
 	public BoardVO() {
 		super();
 	}
@@ -25,6 +31,7 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 
+	// 접근자 / 수정자 선언
 	public int getBno() {
 		return bno;
 	}
@@ -73,6 +80,7 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 
+	// toString 선언
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="

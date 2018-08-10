@@ -1,10 +1,13 @@
 package com.mis.domain;
 
 public class UserVO {
-	
+	/** 유저 아이디 */
 	private String usid;
+	/** 비밀번호 */
 	private String upw;
+	/** 이름 */
 	private String uname;
+	
 	private int upoint;
 	
 	public String getUsid() {

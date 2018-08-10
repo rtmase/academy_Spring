@@ -58,7 +58,8 @@ public class Criteria {
 				
 		return this.startPage;
 	}
-
+	
+	// toString ¼±¾ð
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", startPage=" + startPage + "]";

@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * 컨트롤러에서 발생하는 exception을 처리하는 클래스
+ * @author PC38211
+ *
+ */
 @ControllerAdvice
 public class CommonExceptionAdvice {
 	

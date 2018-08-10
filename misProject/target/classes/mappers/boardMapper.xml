@@ -1,141 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mis.mapper.BoardMapper">
-
 	<insert id="create">
-		insert into tbl_board (bno, title, content, writer)
-		values (seq_board.nextval, #{title}, #{content}, #{writer})
+		INSERT INTO tbl_board (bno, title, content, writer)
+		VALUES (seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 	
 	<select id="read" resultType="com.mis.domain.BoardVO">
-		select bno,
-			   title,
-			   content,
-			   writer,
-			   regdate,
-			   viewcnt
-		  from tbl_board
-		 where bno = #{bno} 	   
-	</select>	
+		SELECT bno
+		      ,title
+		      ,content
+		      ,writer
+		      ,regdate
+		      ,viewcnt
+		  FROM tbl_board
+		 WHERE bno = #{bno}      
+	</select>
 	
 	<update id="update">
-		update tbl_board 
-		   set title = #{title},
-		       content = #{content},
-		       writer = #{writer}
-	     where bno = #{bno}
+		UPDATE tbl_board
+		   SET title   = #{title}
+		      ,content = #{content}
+		      ,writer  = #{writer}
+		 WHERE bno = #{bno}     
 	</update>
 	
 	<delete id="delete">
-		delete tbl_board 
-		 where bno = #{bno}
+		DELETE FROM tbl_board
+		 WHERE bno = #{bno}
 	</delete>
-
+	
 	<select id="listAll" resultType="com.mis.domain.BoardVO">
 		<![CDATA[
-			select bno,
-				   title,
-				   content,
-				   writer,
-				   regdate,
-				   viewcnt
-			  from tbl_board
-			 where bno > 0
-			 order by bno desc, regdate desc 
+			SELECT bno
+			      ,title
+			      ,content
+			      ,writer
+			      ,regdate
+			      ,viewcnt
+			  FROM tbl_board
+			 WHERE bno > 0
+			 ORDER BY bno DESC, regdate DESC
 		]]>
 	</select>
 	
 	<update id="updateViewCnt">
-		UPDATE TBL_BOARD
-     	   SET viewcnt = viewcnt + 1
-<!--      	   				 (SELECT viewcnt + 1 -->
-<!--                             FROM tbl_board -->
-<!--                            WHERE bno = #{bno}) -->
-   		 WHERE bno = #{bno}
+		UPDATE tbl_board
+		   SET viewcnt = viewcnt + 1
+<!-- 		   	            (SELECT viewcnt + 1 -->
+<!-- 		   			       FROM tbl_board -->
+<!-- 		   			      WHERE bno = #{bno}) -->
+		 WHERE bno = #{bno}     
 	</update>
 	
 	<select id="listPage" resultType="com.mis.domain.BoardVO">
 		<![CDATA[
 			SELECT *
-			  FROM ( SELECT bno, title, content, wrtier, regdate, viewcnt
-			           FROM tbl_board 
-			          WHERE bno > 0 )
+			  FROM (SELECT bno, title, content, writer, regdate, viewcnt
+			          FROM tbl_board 
+			         WHERE bno > 0 )
 			 WHERE rownum <= #{page}
-			 ORDER BY bno desc, regdate desc      	
-		]]>
+			 ORDER BY bno DESC, regdate DESC
+		]]>	
 	</select>
-	
+
 	<select id="listCriteria" resultType="com.mis.domain.BoardVO">
 		<![CDATA[
-			SELECT * 
-			  FROM ( SELECT rownum rnum, bno, title, content, writer, regdate, viewcnt
-			           FROM tbl_board where bno > 0)
-			 WHERE ( rnum >= #{pageStart} AND rnum <= #{pageEnd})
-			 ORDER BY bno desc, regdate desc          
-		]]>
+			SELECT *
+			  FROM (SELECT rownum rnum, bno, title, content, writer, regdate, viewcnt
+			          FROM tbl_board 
+			         WHERE bno > 0 )
+			 WHERE (rnum >= #{pageStart} AND rnum <= #{pageEnd}) 
+			 ORDER BY bno DESC, regdate DESC
+		]]>	
 	</select>
 	
 	<select id="countPaging" resultType="int">
 		<![CDATA[
 			SELECT count(bno)
 			  FROM tbl_board
-			 WHERE bno > 0 
+			 WHERE bno > 0 		
 		]]>
-	</select>
-	
-	<select id="listSearch" resultType="com.mis.domain.BoardVO">
-		<![CDATA[
-         SELECT *
-           FROM (SELECT rownum rnum, bno, title, content, writer, regdate, viewcnt
-                    FROM tbl_board 
-                   WHERE bno > 0  
-      	]]>
-
-		<include refid="search"></include>
-		   ORDER BY bno desc
-		 <![CDATA[
-         ) WHERE (rnum >= #{pageStart} AND rnum <= #{pageEnd})
-           ORDER BY bno DESC, regdate DESC
-     	 ]]>
-
-	</select>
-	
-	<select id="listSearchCount" resultType="int">
-		<![CDATA[
-         SELECT count(bno)
-           FROM tbl_board
-          WHERE bno > 0 
-      	]]>
-		<include refid="search"></include>
-		  
 	</select>
 	
 	<sql id="search">
 		<if test="searchType != null">
-         <if test="searchType == 't'.toString()">
-            and title    like '%' || #{keyword} || '%'      
-         </if>
-         <if test="searchType == 'c'.toString()">
-            and content  like '%' || #{keyword} || '%'      
-         </if>
-         <if test="searchType == 'w'.toString()">
-            and writer   like '%' || #{keyword} || '%'      
-         </if>
-         <if test="searchType == 'tc'.toString()">
-            and (title   like '%' || #{keyword} || '%' 
-              OR content like '%' || #{keyword} || '%')      
-         </if>
-         <if test="searchType == 'cw'.toString()">
-            and (content like '%' || #{keyword} || '%' 
-              OR writer  like '%' || #{keyword} || '%')      
-         </if>
-         <if test="searchType == 'tcw'.toString()">
-            and (title   like '%' || #{keyword} || '%' 
-              OR content like '%' || #{keyword} || '%'
-              OR writer  like '%' || #{keyword} || '%')      
-         </if>
-      </if>
-
+			<if test="searchType == 't'.toString()">
+				and title    like '%' || #{keyword} || '%'		
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content  like '%' || #{keyword} || '%'		
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer   like '%' || #{keyword} || '%'		
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (title   like '%' || #{keyword} || '%' 
+				  OR content like '%' || #{keyword} || '%')		
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and (content like '%' || #{keyword} || '%' 
+				  OR writer  like '%' || #{keyword} || '%')		
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and (title   like '%' || #{keyword} || '%' 
+				  OR content like '%' || #{keyword} || '%'
+				  OR writer  like '%' || #{keyword} || '%')		
+			</if>
+		</if>
 	</sql>
-</mapper>  
+	
+	<select id="listSearch" resultType="com.mis.domain.BoardVO">
+		<![CDATA[
+			SELECT *
+			  FROM (SELECT rownum rnum, bno, title, content, writer, regdate, viewcnt
+			  	      FROM tbl_board 
+			  	     WHERE bno > 0  
+		]]>
+		
+		<include refid="search"></include>
+		
+			  ORDER BY bno DESC
+
+		<![CDATA[
+			) WHERE (rnum >= #{pageStart} AND rnum <= #{pageEnd})
+		]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT count(bno)
+			  FROM tbl_board
+			 WHERE bno > 0 
+		]]>
+		
+		<include refid="search"></include>
+		
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

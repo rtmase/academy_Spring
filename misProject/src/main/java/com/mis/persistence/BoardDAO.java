@@ -44,10 +44,21 @@ public interface BoardDAO {
 	 */
 	public void updateViewCnt(int bno) throws Exception;
 	
+	
 	public List<BoardVO> listPage(int page) throws Exception;
-	
+	/**
+	 * 보여지는 리스트당 데이터 10개를 조회
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 */
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
-	
+	/**
+	 * 전체 게시물 갯수 조회
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 */
 	public int countPaging(Criteria cri) throws Exception;
 	
 	// use for dynamic sql

@@ -28,13 +28,22 @@
 							---</option>
 						<option value="t"
 							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-							ProductCode</option>
+							Title</option>
 						<option value="c"
 							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-							ProductName</option>
+							Content</option>
+						<option value="w"
+							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+							Writer</option>
 						<option value="tc"
 							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-							ProductCode OR ProductName</option>
+							Title OR Content</option>
+						<option value="cw"
+							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
+							Content OR Writer</option>
+						<option value="tcw"
+							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+							Title OR Content OR Writer</option>
 					</select> <input type="text" name='keyword' id="keywordInput"
 						value='${cri.keyword }'>
 					<button id='searchBtn'>Search</button>
@@ -51,24 +60,25 @@
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">BNO</th>
-							<th>TITLE</th>
-							<th>WRITER</th>
-							<th>REGDATE</th>
-							<th style="width: 40px">VIEWCNT</th>
+							<th style="width: 10px">Product</th>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Quantity</th>
+<!-- 							<th style="width: 40px">VIEWCNT</th> -->
 						</tr>
 
-						<c:forEach items="${list}" var="boardVO">
+						<c:forEach items="${list}" var="productVO">
 
 							<tr>
 								<td>${boardVO.bno}</td>
 								<td><a
-									href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
-										${boardVO.title} </a></td>
-								<td>${boardVO.writer}</td>
+									href='/shop/read${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${productVO.prodcod}'>
+										${productVO.prodname} </a></td>
+								<td>${productVO.price}</td>
+								<td>${productVO.quantity}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${boardVO.regdate}" /></td>
-								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
+										value="${productVO.regdate}" /></td>
+<%-- 								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td> --%>
 							</tr>
 
 						</c:forEach>
