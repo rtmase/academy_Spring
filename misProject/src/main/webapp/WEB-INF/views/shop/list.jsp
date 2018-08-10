@@ -51,6 +51,8 @@
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
+							<th>no</th>
+							<th>no</th>
 							<th style="width: 10px">Product</th>
 							<th>Name</th>
 							<th>Price</th>
@@ -59,9 +61,12 @@
 <!-- 							<th style="width: 40px">VIEWCNT</th> -->
 						</tr>
 
-						<c:forEach items="${list}" var="productVO">
-
+						<c:forEach items="${list}" var="productVO" varStatus="status">
+						
 							<tr>
+<%-- 								<td>${(pageMaker.totalCount - status.index) - ((pageMaker.cri.page - 1) * pageMaker.cri.perPageNum) }</td> --%>
+								<td>${(pageMaker.totalCount-status.index) - pageMaker.listCount(pageMaker.cri.page) }</td>
+								<td>${status.count + pageMaker.listCount(pageMaker.cri.page) }</td>
 								<td>${productVO.prodcod}</td>
 								<td><a
 									href='/shop/read${pageMaker.makeSearch(pageMaker.cri.page) }&prodcod=${productVO.prodcod}'>
@@ -72,7 +77,6 @@
 										value="${productVO.regdate}" /></td>
 <%-- 								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td> --%>
 							</tr>
-
 						</c:forEach>
 
 					</table>
